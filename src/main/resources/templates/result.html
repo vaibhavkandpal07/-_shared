@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Submission Result</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: #0b0f19;
+            color: #e5e7eb;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* NAVBAR (same as your theme) */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 50px;
+            background: rgba(11, 15, 25, 0.7);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 600;
+            color: #f97316;
+        }
+
+        /* MAIN */
+        .main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        /* RESULT CARD */
+        .card {
+            width: 420px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 14px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+        }
+
+        .card h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #f97316;
+        }
+
+        .info {
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .label {
+            color: #9ca3af;
+        }
+
+        .value {
+            color: #f9fafb;
+            font-weight: 500;
+        }
+
+        /* BUTTON */
+        .btn {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 8px;
+            background: #f97316;
+            color: white;
+            text-decoration: none;
+            transition: 0.25s;
+        }
+
+        .btn:hover {
+            background: #ea580c;
+        }
+
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            padding: 12px;
+            font-size: 12px;
+            color: #6b7280;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="logo">JobTracker</div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+    <div class="card">
+
+        <h2>Submission Received ✅</h2>
+
+        <div class="info">
+            <span class="label">👤 Name: </span>
+            <span class="value" th:text="${userForm.name}"></span>
+        </div>
+
+        <div class="info">
+            <span class="label">📧 Email: </span>
+            <span class="value" th:text="${userForm.email}"></span>
+        </div>
+
+        <div class="info">
+            <span class="label">📞 Phone: </span>
+            <span class="value" th:text="${userForm.phone}"></span>
+        </div>
+
+        <div class="info">
+            <span class="label">📝 Description: </span>
+            <span class="value" th:text="${userForm.description}"></span>
+        </div>
+         <div class="info">
+            <span class="label"> Your Resume has been Received. Wait until we contact you. </span>
+        </div>
+
+        <a href="/home" class="btn">Back To Home</a>
+
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    © 2026 JobTracker
+</div>
+
+</body>
+</html>

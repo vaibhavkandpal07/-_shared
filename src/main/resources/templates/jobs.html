@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Jobs</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0b0f19;
+            color: #e5e7eb;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ===== NAVBAR (SAME AS HOME) ===== */
+        .navbar {
+            position: sticky;
+            top: 0;
+            backdrop-filter: blur(12px);
+            background: rgba(11, 15, 25, 0.7);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 50px;
+        }
+
+        .logo {
+            font-size: 40px;
+            font-weight: 600;
+            color: #f97316;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            color: #9ca3af;
+            transition: 0.25s;
+        }
+
+        .nav-links a:hover {
+            color: #f97316;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            text-align: center;
+            padding: 60px 20px 20px;
+        }
+
+        .header h1 {
+            font-size: 55px;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #ffffff, #fdba74);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header p {
+            color: #9ca3af;
+        }
+
+        .main-content {
+            flex: 1;
+        }
+
+        /* ===== GRID ===== */
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            padding: 30px 60px;
+        }
+
+        /* ===== GLASS CARD ===== */
+        .card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            backdrop-filter: blur(10px);
+
+            border-radius: 14px;
+            padding: 20px;
+            position: relative;
+
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: #f97316;
+            box-shadow: 0 0 20px rgba(249,115,22,0.25);
+        }
+
+        /* ===== BADGE ===== */
+        .badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+
+            background: #f97316;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 11px;
+        }
+
+        .job-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .company {
+            font-size: 14px;
+            color: #9ca3af;
+            margin-bottom: 10px;
+        }
+
+        .desc {
+            font-size: 13px;
+            color: #cbd5f5;
+            line-height: 1.5;
+        }
+
+        /* ===== BUTTON ===== */
+        .apply-btn {
+            margin-top: 15px;
+            display: inline-block;
+
+            padding: 8px 14px;
+            border-radius: 8px;
+
+            border: 1px solid #f97316;
+            color: #f97316;
+
+            transition: 0.25s;
+        }
+
+        .apply-btn:hover {
+            background: #f97316;
+            color: white;
+        }
+
+        /* ===== FOOTER (SAME STYLE) ===== */
+           .footer {
+    border-top: 40px solid rgba(255,255,255,0.05);
+    padding: 40px 60px;
+}
+
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+
+.footer-col {
+    max-width: 250px;
+}
+
+.footer-col h3 {
+    color: #f97316;
+    margin-bottom: 10px;
+}
+
+.footer-col h4 {
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.footer-col p {
+    font-size: 13px;
+    color: #9ca3af;
+    line-height: 1.5;
+}
+
+.footer-col a {
+    display: block;
+    font-size: 13px;
+    color: #9ca3af;
+    margin-bottom: 6px;
+    transition: 0.2s;
+}
+
+.footer-col a:hover {
+    color: #f97316;
+}
+
+.footer-bottom {
+    text-align: center;
+    font-size: 12px;
+    color: #6b7280;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding-top: 15px;
+}
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <a href="/home"><div class="logo">JobTracker.</div></a>
+
+    <div class="nav-links">
+        <a href="/home">Home</a>
+        <a href="/jobs">Jobs</a>
+        <a href="/add-job">Details</a>
+    </div>
+</div>
+
+<div class="main-content">
+
+    <!-- HEADER -->
+    <div class="header">
+        <h1>Available Jobs</h1>
+        <p>Find opportunities that match your skills</p>
+    </div>
+
+    <!-- JOB CARDS -->
+    <div class="container">
+
+        <div class="card">
+            <div class="badge">NEW</div>
+            <div class="job-title">Java Developer</div>
+            <div class="company">Google</div>
+            <div class="desc">
+                Backend development using Spring Boot and microservices.
+            </div>
+            <a class="apply-btn" href="#">Apply</a>
+        </div>
+
+        <div class="card">
+            <div class="badge">HOT</div>
+            <div class="job-title">Frontend Developer</div>
+            <div class="company">Microsoft</div>
+            <div class="desc">
+                Build modern UI using React and responsive design systems.
+            </div>
+            <a class="apply-btn" href="#">Apply</a>
+        </div>
+
+        <div class="card">
+            <div class="badge">FEATURED</div>
+            <div class="job-title">Full Stack Engineer</div>
+            <div class="company">Amazon</div>
+            <div class="desc">
+                Work across frontend, backend and cloud infrastructure.
+            </div>
+            <a class="apply-btn" href="#">Apply</a>
+        </div>
+          <div class="card">
+            <div class="badge">FEATURED</div>
+            <div class="job-title">Full Stack Engineer</div>
+            <div class="company">Amazon</div>
+            <div class="desc">
+                Work across frontend, backend and cloud infrastructure.
+            </div>
+            <a class="apply-btn" href="#">Apply</a>
+        </div>
+        
+          <div class="card">
+            <div class="badge">FEATURED</div>
+            <div class="job-title">Full Stack Engineer</div>
+            <div class="company">Amazon</div>
+            <div class="desc">
+                Work across frontend, backend and cloud infrastructure.
+            </div>
+            <a class="apply-btn" href="#">Apply</a>
+        </div>
+        
+          <div class="card">
+            <div class="badge">FEATURED</div>
+            <div class="job-title">Full Stack Engineer</div>
+            <div class="company">Amazon</div>
+            <div class="desc">
+                Work across frontend, backend and cloud infrastructure.
+            </div>
+            <a class="apply-btn" href="#">Apply</a>
+        </div>
+     
+          <div class="card">
+            <div class="badge">FEATURED</div>
+            <div class="job-title">Full Stack Engineer</div>
+            <div class="company">Amazon</div>
+            <div class="desc">
+                Work across frontend, backend and cloud infrastructure.
+            </div>
+            <a class="apply-btn" href="#">Apply</a>
+        </div>
+        
+          <div class="card">
+            <div class="badge">FEATURED</div>
+            <div class="job-title">Full Stack Engineer</div>
+            <div class="company">Amazon</div>
+            <div class="desc">
+                Work across frontend, backend and cloud infrastructure.
+            </div>
+            <a class="apply-btn" href="#">Apply</a>
+        </div>
+     
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+
+
+<div class="footer">
+
+    <div class="footer-top">
+
+        <!-- LEFT -->
+        <div class="footer-col">
+            <h3>JobTracker.</h3>
+            <p>
+                A simple tool to manage job applications,
+                track progress, and stay organized.
+            </p>
+        </div>
+
+        <!-- MIDDLE -->
+        <div class="footer-col">
+            <h4>Navigation</h4>
+            <a href="/home">Home</a>
+            <a href="/jobs">Jobs</a>
+            <a href="/add-job">Details</a>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="footer-col">
+            <h4>Built With</h4>
+            <p>Spring Boot</p>
+            <p>Thymeleaf</p>
+            <p>MySQL</p>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2026 JobTracker | All rights reserved
+    </div>
+
+</div>
+
+</body>
+</html>

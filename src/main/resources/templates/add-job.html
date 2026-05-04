@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tell Us About Yourself!</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0b0f19;
+            color: #e5e7eb;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ===== NAVBAR (SAME AS OTHER PAGES) ===== */
+        .navbar {
+            position: sticky;
+            top: 0;
+            backdrop-filter: blur(12px);
+            background: rgba(11, 15, 25, 0.7);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 50px;
+        }
+
+        .logo {
+            font-size: 40px;
+            font-weight: 600;
+            color: #f97316;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            color: #9ca3af;
+            transition: 0.25s;
+        }
+
+        .nav-links a:hover {
+            color: #f97316;
+        }
+
+        /* ===== MAIN ===== */
+        .main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 20px;
+        }
+
+        /* ===== FORM BOX (GLASS STYLE) ===== */
+        .form-box {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            backdrop-filter: blur(10px);
+
+            padding: 30px;
+            border-radius: 16px;
+            width: 400px;
+
+            transition: 0.3s;
+        }
+
+        .form-box:hover {
+            border-color: #f97316;
+            box-shadow: 0 0 20px rgba(249,115,22,0.2);
+        }
+
+        .form-box h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        /* ===== INPUTS ===== */
+        input, textarea {
+            width: 100%;
+            padding: 10px 12px;
+            margin: 10px 0;
+
+            border-radius: 8px;
+            border: 1px solid #374151;
+            background: rgba(255,255,255,0.02);
+            color: #e5e7eb;
+
+            outline: none;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #f97316;
+        }
+
+        textarea {
+            resize: none;
+        }
+
+        /* ===== BUTTON ===== */
+        button {
+            width: 100%;
+            padding: 11px;
+            margin-top: 10px;
+
+            background: #f97316;
+            color: white;
+
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+
+            transition: 0.25s;
+        }
+
+        button:hover {
+            background: #ea580c;
+            box-shadow: 0 0 20px rgba(249,115,22,0.4);
+        }
+
+        /* ===== FOOTER ===== */
+    .footer {
+    border-top: 40px solid rgba(255,255,255,0.05);
+    padding: 40px 60px;
+}
+
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+
+.footer-col {
+    max-width: 250px;
+}
+
+.footer-col h3 {
+    color: #f97316;
+    margin-bottom: 10px;
+}
+
+.footer-col h4 {
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.footer-col p {
+    font-size: 13px;
+    color: #9ca3af;
+    line-height: 1.5;
+}
+
+.footer-col a {
+    display: block;
+    font-size: 13px;
+    color: #9ca3af;
+    margin-bottom: 6px;
+    transition: 0.2s;
+}
+
+.footer-col a:hover {
+    color: #f97316;
+}
+
+.footer-bottom {
+    text-align: center;
+    font-size: 12px;
+    color: #6b7280;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding-top: 15px;
+}
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <a href="/home">
+    <div class="logo">
+       JobTracker.
+    </div>
+    </a>
+
+    <div class="nav-links">
+        <a href="/home">Home</a>
+        <a href="/jobs">Jobs</a>
+        <a href="/add-job">Details</a>
+    </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+    <div class="form-box">
+
+        <h2>- - Fill The Details - -</h2>
+
+        <form th:action="@{/submitForm}"th:object="${userForm}" method="post" enctype="multipart/form-data">
+
+            <input type="text" th:field="*{name}" name="title" placeholder="Name" required>
+
+            <input type="email" th:field="*{email}" name="company" placeholder="Email ID" required>
+            
+            <input type="tel" th:field="*{phone}" id="phone" name="phone" placeholder="123-45-678" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required>
+
+            <textarea name="description" th:field="*{description}" rows="4" placeholder="Job Description"></textarea>
+            
+             <input type="file" name="resume">
+            
+            <button type="submit">Submit</button>
+
+        </form>
+
+    </div>
+</div>
+
+<!-- FOOTER -->
+
+
+<div class="footer">
+
+    <div class="footer-top">
+
+        <!-- LEFT -->
+        <div class="footer-col">
+            <h3>JobTracker.</h3>
+            <p>
+                A simple tool to manage job applications,
+                track progress, and stay organized.
+            </p>
+        </div>
+
+        <!-- MIDDLE -->
+        <div class="footer-col">
+            <h4>Navigation</h4>
+            <a href="/home">Home</a>
+            <a href="/jobs">Jobs</a>
+            <a href="/add-job">Details</a>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="footer-col">
+            <h4>Built With</h4>
+            <p>Spring Boot</p>
+            <p>Thymeleaf</p>
+            <p>MySQL</p>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2026 JobTracker | All rights reserved
+    </div>
+
+</div>
+
+</body>
+</html>
