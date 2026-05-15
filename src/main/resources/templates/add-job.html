@@ -218,14 +218,24 @@
 
         <form th:action="@{/submitForm}"th:object="${userForm}" method="post" enctype="multipart/form-data">
 
+           
             <input type="text" th:field="*{name}" name="title" placeholder="Name" required>
-
+             <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"style="color:orange;"></p>
+   
+     <!--  YOU NEED TO SHOW VALIDATION ERRORS IT WILL NOT APPEAR ON ITS OWN EVEN IF YOU WRITE THEM ON YOUR DTO INSTANCE VARIABLES-->
+     
             <input type="email" th:field="*{email}" name="company" placeholder="Email ID" required>
+           
+            <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"  style="color:orange;"></p>
             
-            <input type="tel" th:field="*{phone}" id="phone" name="phone" placeholder="123-45-678" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required>
-
+            <input type="tel" th:field="*{phone}" id="phone" name="phone" placeholder="1234567890" pattern="[0-9]{10,15}" required>
+             <p th:if="${#fields.hasErrors('phone')}" 
+               th:errors="*{phone}" 
+                 style="color:orange;"></p>
             <textarea name="description" th:field="*{description}" rows="4" placeholder="Job Description"></textarea>
-            
+             <p th:if="${#fields.hasErrors('description')}" 
+           th:errors="*{description}" 
+           style="color:orange;"></p>
              <input type="file" name="resume">
             
             <button type="submit">Submit</button>

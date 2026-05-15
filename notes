@@ -1,0 +1,14 @@
+<!-- ===== NAVBAR ===== -->
+<div class="navbar">
+    <div class="logo">JobTracker.</div>
+
+    <div class="nav-links">
+        <a href="/home">Home</a>
+        <a href="/jobs">Jobs</a>
+        <a href="/add-job">Details</a>
+    </div>
+
+    <div class="nav-right">
+        VaibByte - Youtube.
+    </div>
+</div>
